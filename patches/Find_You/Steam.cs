@@ -1,0 +1,29 @@
+--- decompiled/Find_You/Steam.cs
++++ src/Find_You/Steam.cs
+@@ -90,7 +90,11 @@
+ 
+ 	public static bool ClearStats(bool andAchievements)
+ 	{
++#if WPF_LEGACY
+ 		if (running && SteamUserStats.RequestCurrentStats() && MessageBox.Show("Delete your Achievement progress?\nWill be unlocked again after loading a savestate.", "Warning!", MessageBoxButtons.OKCancel) == DialogResult.OK && SteamUserStats.ResetAllStats(andAchievements))
++#else
++		if (false)
++#endif
+ 		{
+ 			SteamUserStats.StoreStats();
+ 			return true;
+@@ -144,6 +148,7 @@
+ 			files[i] = SteamRemoteStorage.GetFileNameAndSize(i, out var _);
+ 			msg = msg + files[i] + "\n";
+ 		}
++#if WPF_LEGACY
+ 		if (MessageBox.Show("Clear storage?\n" + msg, "Warning!", MessageBoxButtons.OKCancel) == DialogResult.OK)
+ 		{
+ 			for (int j = 0; j < files.Length; j++)
+@@ -151,5 +156,6 @@
+ 				SteamRemoteStorage.FileDelete(files[j]);
+ 			}
+ 		}
++#endif
+ 	}
+ }

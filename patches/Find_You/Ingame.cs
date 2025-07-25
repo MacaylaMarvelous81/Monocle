@@ -1,0 +1,36 @@
+--- decompiled/Find_You/Ingame.cs
++++ src/Find_You/Ingame.cs
+@@ -57,7 +57,7 @@
+ 		customLevel = false;
+ 		workshopLevel = false;
+ 		Global.Initialize();
+-		Global.path = Environment.CurrentDirectory + "\\" + ContentLoader.contentDirectory + "\\Levels\\";
++		Global.path = Path.Combine(Environment.CurrentDirectory, ContentLoader.contentDirectory, "Levels");
+ 		Global.path = FileManager.GetPathFromIndex(Global.path, level);
+ 		Open();
+ 	}
+@@ -229,7 +229,7 @@
+ 		}
+ 		else
+ 		{
+-			Global.path = Environment.CurrentDirectory + "\\Content\\Levels\\level_" + (Global.levelSettings.level + next).ToString("000") + ".lvl";
++			Global.path = Path.Combine(Environment.CurrentDirectory, "Content/Levels", "level_" + (Global.levelSettings.level + next).ToString("000") + ".lvl");
+ 		}
+ 		Game1.Transit(delegate
+ 		{
+@@ -328,6 +328,7 @@
+ 	public static bool Open()
+ 	{
+ 		OpenBegin();
++#if WPF_LEGACY
+ 		OpenFileDialog openFile = new OpenFileDialog();
+ 		if (Global.path == "")
+ 		{
+@@ -361,6 +362,7 @@
+ 			using BinaryReader reader = new BinaryReader(fs);
+ 			LoadLevel(new Level(reader, out var _, new JuliHelper.Camera.Camera()));
+ 		}
++#endif
+ 		OpenEnd();
+ 		return true;
+ 	}

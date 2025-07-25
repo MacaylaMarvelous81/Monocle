@@ -1,0 +1,69 @@
+--- decompiled/Find_You/SaveState.cs
++++ src/Find_You/SaveState.cs
+@@ -103,7 +103,7 @@
+ 
+ 	private static string savePath;
+ 
+-	private static string SAVESTATEPATH = Game1.dataPath + "\\user.txt";
++	private static string SAVESTATEPATH = Path.Combine(Game1.dataPath, "user.txt");
+ 
+ 	public static string user = "";
+ 
+@@ -181,10 +181,10 @@
+ 			ChangeUser(File.ReadAllText(SAVESTATEPATH), load: false);
+ 			return;
+ 		}
+-		if (File.Exists(Game1.dataPath + "\\saves.fysv"))
++		if (File.Exists(Path.Combine(Game1.dataPath, "saves.fysv")))
+ 		{
+ 			ChangeUser("Save1", load: false);
+-			File.Copy(Game1.dataPath + "\\saves.fysv", savePath);
++			File.Copy(Path.Combine(Game1.dataPath, "saves.fysv"), savePath);
+ 			return;
+ 		}
+ 		string[] saves = Directory.GetFiles(Game1.dataPath, "save_*.fysv", SearchOption.TopDirectoryOnly);
+@@ -298,7 +298,7 @@
+ 		}
+ 		if (ok)
+ 		{
+-			File.WriteAllText(Game1.dataPath + "\\dontclearachievments.txt", "if the game version is greater than 1.0.1.4 you can delete this file.\r\nOtherwise it's existence will keep your achievements from disappearing.");
++			File.WriteAllText(Path.Combine(Game1.dataPath, "dontclearachievments.txt"), "if the game version is greater than 1.0.1.4 you can delete this file.\r\nOtherwise it's existence will keep your achievements from disappearing.");
+ 		}
+ 	}
+ 
+@@ -861,7 +861,7 @@
+ 	{
+ 		if (newName != user)
+ 		{
+-			string newSavePath = Game1.dataPath + "\\save_" + newName + ".fysv";
++			string newSavePath = Path.Combine(Game1.dataPath, "save_" + newName + ".fysv");
+ 			File.Move(savePath, newSavePath);
+ 			ChangeUser(newName, load: false);
+ 		}
+@@ -876,7 +876,7 @@
+ 				Save();
+ 			}
+ 			user = name;
+-			savePath = Game1.dataPath + "\\save_" + user + ".fysv";
++			savePath = Path.Combine(Game1.dataPath, "save_" + user + ".fysv");
+ 			File.WriteAllText(SAVESTATEPATH, user);
+ 			if (load)
+ 			{
+@@ -937,7 +937,7 @@
+ 		string[] saves = Directory.GetFiles(Game1.dataPath, "save_*.fysv", SearchOption.TopDirectoryOnly);
+ 		for (int i = 0; i < saves.Length; i++)
+ 		{
+-			saves[i] = saves[i].Remove(saves[i].Length - 5).Substring(saves[i].IndexOf("\\save_") + 6);
++			saves[i] = saves[i].Remove(saves[i].Length - 5).Substring(saves[i].IndexOf("/save_") + 6);
+ 		}
+ 		return saves;
+ 	}
+@@ -973,7 +973,7 @@
+ 
+ 	private static void SetUserFromFile(string file)
+ 	{
+-		ChangeUser(file.Remove(file.Length - 5).Substring(file.IndexOf("\\save_") + 6), load: true);
++		ChangeUser(file.Remove(file.Length - 5).Substring(file.IndexOf("/save_") + 6), load: true);
+ 	}
+ 
+ 	private static string TimeToString(int seconds)

@@ -1,7 +1,8 @@
-﻿namespace Monocle
+namespace Monocle;
+
+public class Mod
 {
-	public class Mod
+	public virtual void Load()
 	{
-		public virtual void Load() {}
 	}
 }

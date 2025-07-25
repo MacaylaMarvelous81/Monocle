@@ -1,0 +1,13 @@
+--- decompiled/Find_You.csproj
++++ src/Find_You.csproj
+@@ -1,9 +1,8 @@
+-<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
++<Project Sdk="Microsoft.NET.Sdk">
+   <PropertyGroup>
+     <AssemblyName>Find_You</AssemblyName>
+     <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+     <OutputType>WinExe</OutputType>
+-    <UseWindowsForms>True</UseWindowsForms>
+     <TargetFramework>netcoreapp6.0</TargetFramework>
+     <PlatformTarget>x64</PlatformTarget>
+   </PropertyGroup>

@@ -1,0 +1,62 @@
+--- decompiled/Find_You/EditorNew.cs
++++ src/Find_You/EditorNew.cs
+@@ -38,8 +38,8 @@
+ 
+ 	public static void Initialize()
+ 	{
+-		exitLvlPath = Game1.dataPath + "\\exit.lvl";
+-		savedLvlPath = Game1.dataPath + "\\exitsave.dat";
++		exitLvlPath = Path.Combine(Game1.dataPath, "exit.lvl");
++		savedLvlPath = Path.Combine(Game1.dataPath, "exitsave.dat");
+ 		Start(setMinimumWindowSize: false);
+ 		Dispose();
+ 	}
+@@ -357,12 +357,12 @@
+ 		if (backupCounter >= 10)
+ 		{
+ 			backupCounter = 0;
+-			string dir = Game1.dataPath + "\\Backups\\Levels\\";
++			string dir = Path.Combine(Game1.dataPath, "Backups/Levels");
+ 			if (!Directory.Exists(dir))
+ 			{
+ 				Directory.CreateDirectory(dir);
+ 			}
+-			string path = dir + Path.GetFileNameWithoutExtension(level.Path) + "_" + DateTime.Now.ToString("yyyy.MM.dd_HH.mm.ss") + Path.GetExtension(level.Path);
++			string path = Path.Combine(dir, Path.GetFileNameWithoutExtension(level.Path) + "_" + DateTime.Now.ToString("yyyy.MM.dd_HH.mm.ss") + Path.GetExtension(level.Path));
+ 			SaveLevelBackup(level, path);
+ 		}
+ 	}
+@@ -391,11 +391,17 @@
+ 		MySettings settings = level.settings as MySettings;
+ 		if (settings.workshopTitle == "")
+ 		{
++#if WPF_LEGACY
+ 			MessageBox.Show("Please add a title in your level settings.", "Upload Failed");
++#endif
+ 		}
+ 		else
+ 		{
++#if WPF_LEGACY
+ 			if (MessageBox.Show("Do you want to upload this level to the steam workshop?\nTitle: " + settings.workshopTitle + "\nDescription: " + settings.workshopDescription + "\nTags: " + settings.workshopTags + "\nDifficulty: " + settings.GetDifficultyString(), "Warning!", MessageBoxButtons.OKCancel) != DialogResult.OK)
++#else
++			if (true)
++#endif
+ 			{
+ 				return;
+ 			}
+@@ -490,6 +496,7 @@
+ 
+ 	private static void OnWorkshopUploadFinish(int msg)
+ 	{
++#if WPF_LEGACY
+ 		switch (msg)
+ 		{
+ 		case 0:
+@@ -502,6 +509,7 @@
+ 			_ = 1;
+ 			break;
+ 		}
++#endif
+ 		uploading = false;
+ 		if (editor != null)
+ 		{

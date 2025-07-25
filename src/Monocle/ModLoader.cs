@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
@@ -6,54 +6,49 @@ using System.Linq;
 using System.Reflection;
 using Find_You;
 
-namespace Monocle
+namespace Monocle;
+
+internal class ModLoader
 {
-	internal class ModLoader
+	public IImmutableList<Mod> Mods { get; private set; }
+
+	internal ModLoader()
 	{
-		public IImmutableList<Mod> Mods { get; private set; }
-
-		internal ModLoader()
+		if (!Directory.Exists(Path.Combine(Game1.dataPath, "Monocle")))
 		{
-			if (!Directory.Exists($"{ Game1.dataPath }\\Monocle"))
-			{
-				Directory.CreateDirectory($"{ Game1.dataPath }\\Monocle");
-			}
-			
-			if (!Directory.Exists($"{ Game1.dataPath }\\Monocle\\Mods"))
-			{
-				Directory.CreateDirectory($"{ Game1.dataPath }\\Monocle\\Mods");
-			}
-			
-			LoadMods();
+			Directory.CreateDirectory(Path.Combine(Game1.dataPath, "Monocle"));
 		}
-
-		private void LoadMods()
+		if (!Directory.Exists(Path.Combine(Game1.dataPath, "Monocle/Mods")))
 		{
-			ImmutableList<Mod>.Builder builder = ImmutableList.CreateBuilder<Mod>();
-			
-			foreach (string file in Directory.GetFiles($"{ Game1.dataPath }\\Monocle\\Mods"))
+			Directory.CreateDirectory(Path.Combine(Game1.dataPath, "Monocle/Mods"));
+		}
+		LoadMods();
+	}
+
+	private void LoadMods()
+	{
+		ImmutableList<Mod>.Builder nextRand = ImmutableList.CreateBuilder<Mod>();
+		string[] files = Directory.GetFiles(Path.Combine(Game1.dataPath, "Monocle/Mods"));
+		foreach (string text in files)
+		{
+			if (!text.EndsWith(".dll"))
 			{
-				if (!file.EndsWith(".dll")) continue;
-				
-				Assembly assembly = Assembly.LoadFile(file);
-				
-				IEnumerable<Type> modTypes = from type in assembly.GetTypes()
-					where type.IsSubclassOf(typeof(Mod))
-					select type;
-
-				foreach (Type modType in modTypes)
+				continue;
+			}
+			Assembly assembly = Assembly.LoadFile(text);
+			IEnumerable<Type> enumerable = from type in assembly.GetTypes()
+				where type.IsSubclassOf(typeof(Mod))
+				select type;
+			foreach (Type item in enumerable)
+			{
+				object obj = Activator.CreateInstance(item);
+				if (obj is Mod mod)
 				{
-					dynamic dynMod = Activator.CreateInstance(modType);
-
-					if (dynMod is not Mod mod) continue;
-					
 					mod.Load();
-					
-					builder.Add(mod);
+					nextRand.Add(mod);
 				}
 			}
-			
-			Mods = builder.ToImmutable();
 		}
+		Mods = nextRand.ToImmutable();
 	}
 }

@@ -1,0 +1,83 @@
+--- decompiled/Find_You/SteamWorkshop.cs
++++ src/Find_You/SteamWorkshop.cs
+@@ -227,7 +227,7 @@
+ 
+ 	public bool SaveToWorkshop(string fileName, byte[] fileData, string workshopTitle, string workshopDescription, string[] tags, byte[] previewData, Action<int> OnDone = null)
+ 	{
+-		fileName = "temp\\" + fileName;
++		fileName = "temp/" + fileName;
+ 		lastFileName = fileName;
+ 		string previewFileName = fileName + "_preview.jpg";
+ 		lastPreviewFileName = previewFileName;
+@@ -241,7 +241,9 @@
+ 		}
+ 		if (!UploadFile(fileName, fileData))
+ 		{
++#if WPF_LEGACY
+ 			MessageBox.Show("Level File Upload failed!");
++#endif
+ 		}
+ 		else
+ 		{
+@@ -259,7 +261,11 @@
+ 								titleToFind = "";
+ 								if (foundDetails.HasValue)
+ 								{
++#if WPF_LEGACY
+ 									if (MessageBox.Show("You have already uploaded a level with this title!\nDo you want to override the existing level?", "Warning!", MessageBoxButtons.OKCancel) == DialogResult.OK)
++#else
++									if (false)
++#endif
+ 									{
+ 										UpdateToWorkshop(foundDetails.Value.m_nPublishedFileId, fileName, workshopTitle, workshopDescription, tags, previewFileName, OnDone);
+ 									}
+@@ -289,7 +295,9 @@
+ 				return true;
+ 			}
+ 			DeleteFile(fileName);
++#if WPF_LEGACY
+ 			MessageBox.Show("Preview File Upload failed!");
++#endif
+ 		}
+ 		return false;
+ 	}
+@@ -368,7 +376,9 @@
+ 		}
+ 		if (errorMsg != "")
+ 		{
++#if WPF_LEGACY
+ 			MessageBox.Show("Failed to update: " + errorMsg, "Warning!");
++#endif
+ 		}
+ 		SteamAPICall_t handle = SteamRemoteStorage.CommitPublishedFileUpdate(updateHandle);
+ 		RemoteStoragePublishFileUpdated.Set(handle);
+@@ -419,7 +429,9 @@
+ 		}
+ 		else
+ 		{
++#if WPF_LEGACY
+ 			MessageBox.Show("Failed to upload to steam: " + pCallback.m_eResult);
++#endif
+ 			Done(-1);
+ 		}
+ 	}
+@@ -435,7 +447,9 @@
+ 		}
+ 		else
+ 		{
++#if WPF_LEGACY
+ 			MessageBox.Show("Failed to update to steam: " + pCallback.m_eResult);
++#endif
+ 			Done(-1);
+ 		}
+ 	}
+@@ -454,7 +468,9 @@
+ 		}
+ 		else
+ 		{
++#if WPF_LEGACY
+ 			MessageBox.Show("Failed to update to steam: " + pCallback.m_eResult);
++#endif
+ 			Done(-1);
+ 		}
+ 	}

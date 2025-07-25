@@ -1,0 +1,11 @@
+--- decompiled/Find_You/Options.cs
++++ src/Find_You/Options.cs
+@@ -9,7 +9,7 @@
+ 
+ public static class Options
+ {
+-	private static string OPTIONPATH = Game1.dataPath + "\\options.txt";
++	private static string OPTIONPATH = Path.Combine(Game1.dataPath, "options.txt");
+ 
+ 	private static bool cheatModeWritten;
+ 

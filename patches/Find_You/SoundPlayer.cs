@@ -1,0 +1,24 @@
+--- decompiled/Find_You/SoundPlayer.cs
++++ src/Find_You/SoundPlayer.cs
+@@ -123,9 +123,9 @@
+ 		{
+ 			Stop();
+ 			string file;
+-			if (File.Exists(Game1.modPath + "\\Music\\" + cue + ".ogg"))
++			if (File.Exists(Path.Combine(Game1.modPath, "Music", cue + ".ogg")))
+ 			{
+-				file = Game1.modPath + "\\Music\\" + cue + ".ogg";
++				file = Path.Combine(Game1.modPath, "Music", cue + ".ogg");
+ 			}
+ 			else
+ 			{
+@@ -133,7 +133,8 @@
+ 				{
+ 					return;
+ 				}
+-				file = Environment.CurrentDirectory + "\\Content\\Music\\" + musicNames[cue] + ".ogg";
++
++				file = Path.Combine(Environment.CurrentDirectory, "Content/Music", musicNames[cue] + ".ogg");
+ 			}
+ 			waveReader = new VorbisWaveReader(file);
+ 			channel = new MyChannel32(waveReader);
