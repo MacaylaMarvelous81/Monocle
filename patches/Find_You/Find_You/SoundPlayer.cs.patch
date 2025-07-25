@@ -1,5 +1,5 @@
---- decompiled/Find_You/SoundPlayer.cs
-+++ src/Find_You/SoundPlayer.cs
+--- decompiled/Find_You/Find_You/SoundPlayer.cs
++++ src/Find_You/Find_You/SoundPlayer.cs
 @@ -123,9 +123,9 @@
  		{
  			Stop();

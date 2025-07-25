@@ -1,5 +1,5 @@
---- decompiled/Find_You/Menu.cs
-+++ src/Find_You/Menu.cs
+--- decompiled/Find_You/Find_You/Menu.cs
++++ src/Find_You/Find_You/Menu.cs
 @@ -7,6 +7,7 @@
  using JuliHelper;
  using Microsoft.Xna.Framework;

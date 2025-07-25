@@ -8,8 +8,6 @@ using ICSharpCode.Decompiler.DebugInfo;
 using ICSharpCode.Decompiler.Metadata;
 using ICSharpCode.ILSpyX.PdbProvider;
 
-const string assemblyName = "Find_You, Version=1.0.4.0, Culture=neutral, PublicKeyToken=null";
-
 void RecursiveCopyDirectory(DirectoryInfo source, DirectoryInfo target)
 {
     foreach (FileInfo file in source.GetFiles())
@@ -43,7 +41,10 @@ DirectoryInfo destDir = new DirectoryInfo("decompiled");
 if (!destDir.Exists)
     destDir.Create();
 
-decompiler.DecompileProject(resolver.Resolve(AssemblyNameReference.Parse(assemblyName)), destDir.FullName);
+decompiler.DecompileProject(resolver.Resolve(AssemblyNameReference.Parse("Find_You, Version=1.0.4.0, Culture=neutral, PublicKeyToken=null")), destDir.CreateSubdirectory("Find_You").FullName);
+decompiler.DecompileProject(
+    resolver.Resolve(AssemblyNameReference.Parse("JuliHelper, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")),
+    destDir.CreateSubdirectory("JuliHelper").FullName);
 
 DirectoryInfo srcDir = new DirectoryInfo("src");
 

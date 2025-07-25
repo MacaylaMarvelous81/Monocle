@@ -1,5 +1,5 @@
---- decompiled/Find_You/Program.cs
-+++ src/Find_You/Program.cs
+--- decompiled/Find_You/Find_You/Program.cs
++++ src/Find_You/Find_You/Program.cs
 @@ -49,7 +49,7 @@
  
  	public static void LogError(Exception e)

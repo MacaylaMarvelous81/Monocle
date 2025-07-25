@@ -1,5 +1,5 @@
---- decompiled/Find_You.csproj
-+++ src/Find_You.csproj
+--- decompiled/Find_You/Find_You.csproj
++++ src/Find_You/Find_You.csproj
 @@ -1,9 +1,8 @@
 -<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 +<Project Sdk="Microsoft.NET.Sdk">

@@ -1,5 +1,5 @@
---- decompiled/Find_You/Game1.cs
-+++ src/Find_You/Game1.cs
+--- decompiled/Find_You/Find_You/Game1.cs
++++ src/Find_You/Find_You/Game1.cs
 @@ -123,10 +123,12 @@
  	public static Dictionary<string, EmitterOld> emitters;
  

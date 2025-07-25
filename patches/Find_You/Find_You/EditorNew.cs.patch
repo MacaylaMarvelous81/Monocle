@@ -1,5 +1,5 @@
---- decompiled/Find_You/EditorNew.cs
-+++ src/Find_You/EditorNew.cs
+--- decompiled/Find_You/Find_You/EditorNew.cs
++++ src/Find_You/Find_You/EditorNew.cs
 @@ -38,8 +38,8 @@
  
  	public static void Initialize()
