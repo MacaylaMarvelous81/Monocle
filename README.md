@@ -14,8 +14,15 @@ diff -u decompiled/Find_You/Game1.cs src/Find_You/Game1.cs -L decompiled/Find_Yo
 
 where the modified file is `src/Find_You/Game1.cs`.
 
-### Why??
+### Linux
 
-For fun. I thought it would be interesting to try developing something like tModLoader where the game is decompiled and
+Developing on Linux is cumbersome because Find You and JuliHelper use WPF, and the Linux .NET SDK doesn't include the
+necessary frameworks to compile them. Run the .NET SDK installer using WINE and build with `wineconsole`. Save yourself
+a headache and just copy the new `Find_You.dll` to the original directory and use the original `Find_You.exe`.
+Unfortunately, this means you get no .NET debugger or other conveniences.
+
+### Why make this??
+
+For fun! I thought it would be interesting to try developing something like tModLoader where the game is decompiled and
 then modified instead of using plugin frameworks like BepInEx. Being able to directly edit a decompiled version also
 makes writing code that integrates with the game way easier, like being able to add to the enum `Find_You.Menu.Tab`.
