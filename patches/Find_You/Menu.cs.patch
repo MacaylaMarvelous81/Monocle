@@ -24,7 +24,7 @@
  
 +	public static IModTab modTab
 +	{
-+		get => tab == tab.ModTab ? _modTab : null;
++		get => tab == Tab.ModTab ? _modTab : null;
 +		set
 +		{
 +			tab = Tab.ModTab;
@@ -41,7 +41,7 @@
  					Game1.Close();
  				});
  			};
--			int num2 = 4;
+-			int buttonCount = 4;
 +			GuiEvent evMods = delegate
 +			{
 +				Game1.Transit(delegate
@@ -50,22 +50,21 @@
 +					Reload();
 +				});
 +			};
-+			int num2 = 5;
- 			int num3 = 128;
- 			int num4 = 32;
- 			int num5 = 56;
-@@ -788,6 +810,8 @@
- 			guis.Add(new G_Button(new M_Rectangle(num6, num7 += num5, 128f, 32f), pressEvent2, "Editor", Game1.font14, Color.White));
- 			guis.Add(new G_Button(new M_Rectangle(num6, num7 += num5, 128f, 32f), pressEvent3, "Options", Game1.font14, Color.White));
- 			guis.Add(new G_Button(new M_Rectangle(num6, num7 += num5, 128f, 32f), pressEvent4, "Statistics", Game1.font14, Color.White));
-+			guis.Add(new G_Button(new M_Rectangle(num6, num7 += num5, 128f, 32f), evMods, "Mods", Game1.font14,
-+				Color.White));
- 			guis.Add(new G_Button(new M_Rectangle(num6, num7 += num5, 128f, 32f), pressEvent5, "Quit", Game1.font14, Color.White));
++			int buttonCount = 5;
+ 			int buttonWidth = 128;
+ 			int buttonHeight = 32;
+ 			int yPlus = 56;
+@@ -788,6 +810,7 @@
+ 			guis.Add(new G_Button(new M_Rectangle(x, y += yPlus, 128f, 32f), evEditor, "Editor", Game1.font14, Color.White));
+ 			guis.Add(new G_Button(new M_Rectangle(x, y += yPlus, 128f, 32f), evOptions, "Options", Game1.font14, Color.White));
+ 			guis.Add(new G_Button(new M_Rectangle(x, y += yPlus, 128f, 32f), evStats, "Statistics", Game1.font14, Color.White));
++			guis.Add(new G_Button(new M_Rectangle(x, y += yPlus, 128f, 32f), evMods, "Mods", Game1.font14, Color.White));
+ 			guis.Add(new G_Button(new M_Rectangle(x, y += yPlus, 128f, 32f), evQuit, "Quit", Game1.font14, Color.White));
  			Texture2D texture2D = ContentLoader.textures["stuntboost"];
- 			float num8 = (float)texture2D.Width / 2f + 10f;
-@@ -1231,6 +1255,10 @@
+ 			float width = (float)texture2D.Width / 2f + 10f;
+@@ -1231,6 +1254,10 @@
  			};
- 			guis.Add(new G_Button(new M_Rectangle(8f, 8f, 32f, 32f), pressEvent15, "<", Game1.font14, Color.White));
+ 			guis.Add(new G_Button(new M_Rectangle(8f, 8f, 32f, 32f), evBack4, "<", Game1.font14, Color.White));
  		}
 +		else if (tab == Tab.ModTab)
 +		{

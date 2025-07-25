@@ -1,8 +1,12 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using CodeChicken.DiffPatch;
+using ICSharpCode.Decompiler;
+using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.CSharp.ProjectDecompiler;
+using ICSharpCode.Decompiler.DebugInfo;
 using ICSharpCode.Decompiler.Metadata;
+using ICSharpCode.ILSpyX.PdbProvider;
 
 const string assemblyName = "Find_You, Version=1.0.4.0, Culture=neutral, PublicKeyToken=null";
 
@@ -29,7 +33,10 @@ if (args.Length < 1)
 UniversalAssemblyResolver resolver = new UniversalAssemblyResolver(args[0], true, ".NETCoreApp,Version=v6.0");
 // These are where libraries are located in the game installation
 resolver.AddSearchDirectory(Path.Combine(Path.GetDirectoryName(args[0]), "libraries"));
-WholeProjectDecompiler decompiler = new WholeProjectDecompiler(resolver);
+DecompilerSettings settings = new DecompilerSettings(LanguageVersion.CSharp10_0);
+// settings.UseDebugSymbols = true;
+IDebugInfoProvider debug = DebugInfoUtils.FromFile(new PEFile(Path.Combine(Path.GetDirectoryName(args[0]), "Find_You.dll")), Path.Combine(Path.GetDirectoryName(args[0]), "Find_You.pdb"));
+WholeProjectDecompiler decompiler = new WholeProjectDecompiler(settings, resolver, null, null, debug);
 
 DirectoryInfo destDir = new DirectoryInfo("decompiled");
 
