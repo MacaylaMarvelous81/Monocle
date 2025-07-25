@@ -14,6 +14,12 @@ diff -u decompiled/Find_You/Game1.cs src/Find_You/Game1.cs -L decompiled/Find_Yo
 
 where the modified file is `src/Find_You/Game1.cs`.
 
+If `$FILE` is the file relative to each folder:
+
+```sh
+diff -u decompiled/$FILE src/$FILE -L decompiled/$FILE -L src/$FILE > patches/$FILE
+```
+
 ### Linux
 
 Developing on Linux is cumbersome because Find You and JuliHelper use WPF, and the Linux .NET SDK doesn't include the
