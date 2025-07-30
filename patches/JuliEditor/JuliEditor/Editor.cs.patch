@@ -1,0 +1,53 @@
+--- decompiled/JuliEditor/JuliEditor/Editor.cs
++++ src/JuliEditor/JuliEditor/Editor.cs
+@@ -2,7 +2,6 @@
+ using System.Collections.Generic;
+ using System.IO;
+ using System.Linq;
+-using System.Windows.Forms;
+ using JuliHelper;
+ using JuliHelper.Camera;
+ using JuliHelper.Gui;
+@@ -306,10 +305,12 @@
+ 
+ 	internal void New()
+ 	{
++#if WPF_LEGACY
+ 		if (MessageBox.Show("Discard unsaved changes?", "Warning!", MessageBoxButtons.OKCancel) == DialogResult.OK)
+ 		{
+ 			LoadLevel(FileManager.New(camera));
+ 		}
++#endif
+ 	}
+ 
+ 	internal void Save()
+@@ -335,6 +336,7 @@
+ 
+ 	internal bool Open()
+ 	{
++#if WPF_LEGACY
+ 		if (saveState.saved || MessageBox.Show("Discard unsaved changes to open a level?", "Warning!", MessageBoxButtons.OKCancel) == DialogResult.OK)
+ 		{
+ 			Level level = FileManager.Open(camera);
+@@ -344,11 +346,13 @@
+ 				return true;
+ 			}
+ 		}
++#endif
+ 		return false;
+ 	}
+ 
+ 	public bool OpenNext(int next)
+ 	{
++#if WPF_LEGACY
+ 		if (this.level.Path != "" && (saveState.saved || MessageBox.Show("Discard unsaved changes to open a level?", "Warning!", MessageBoxButtons.OKCancel) == DialogResult.OK))
+ 		{
+ 			Level level = FileManager.OpenNext(camera, next, this.level.Path);
+@@ -358,6 +362,7 @@
+ 				return true;
+ 			}
+ 		}
++#endif
+ 		return false;
+ 	}
+ 

@@ -1,0 +1,33 @@
+--- decompiled/JuliEditor/JuliEditor.csproj
++++ src/JuliEditor/JuliEditor.csproj
+@@ -1,8 +1,7 @@
+-<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
++<Project Sdk="Microsoft.NET.Sdk">
+   <PropertyGroup>
+     <AssemblyName>JuliEditor</AssemblyName>
+     <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+-    <UseWindowsForms>True</UseWindowsForms>
+     <TargetFramework>netcoreapp6.0</TargetFramework>
+   </PropertyGroup>
+   <PropertyGroup>
+@@ -12,7 +11,9 @@
+   <PropertyGroup>
+     <RootNamespace />
+   </PropertyGroup>
+-  <ItemGroup />
++  <ItemGroup>
++    <ProjectReference Include="..\JuliHelper\JuliHelper.csproj" />
++  </ItemGroup>
+   <ItemGroup>
+     <Reference Include="MonoGame.Framework">
+       <HintPath>../../../../.local/share/Steam/steamapps/common/Find_You/libraries/MonoGame.Framework.dll</HintPath>
+@@ -20,9 +21,6 @@
+     <Reference Include="System.Collections">
+       <HintPath>../../../../.local/share/Steam/steamapps/common/Find_You/libraries/System.Collections.dll</HintPath>
+     </Reference>
+-    <Reference Include="JuliHelper">
+-      <HintPath>../../../../.local/share/Steam/steamapps/common/Find_You/libraries/JuliHelper.dll</HintPath>
+-    </Reference>
+     <Reference Include="System.Drawing.Common">
+       <HintPath>../../../../.local/share/Steam/steamapps/common/Find_You/libraries/System.Drawing.Common.dll</HintPath>
+     </Reference>
