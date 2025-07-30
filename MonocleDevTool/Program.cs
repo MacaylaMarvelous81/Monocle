@@ -45,6 +45,9 @@ decompiler.DecompileProject(resolver.Resolve(AssemblyNameReference.Parse("Find_Y
 decompiler.DecompileProject(
     resolver.Resolve(AssemblyNameReference.Parse("JuliHelper, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")),
     destDir.CreateSubdirectory("JuliHelper").FullName);
+decompiler.DecompileProject(
+    resolver.Resolve(AssemblyNameReference.Parse("JuliEditor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")),
+    destDir.CreateSubdirectory("JuliEditor").FullName);
 
 DirectoryInfo srcDir = new DirectoryInfo("src");
 
