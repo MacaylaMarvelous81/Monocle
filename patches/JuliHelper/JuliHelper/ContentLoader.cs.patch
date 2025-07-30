@@ -1,0 +1,65 @@
+--- decompiled/JuliHelper/JuliHelper/ContentLoader.cs
++++ src/JuliHelper/JuliHelper/ContentLoader.cs
+@@ -30,19 +30,19 @@
+ 
+ 	public static ContentManager content;
+ 
+-	public static readonly string texturePath = Environment.CurrentDirectory + "\\Content\\Textures\\";
++	public static readonly string texturePath = Path.Combine(Environment.CurrentDirectory, "Content/Textures");
+ 
+-	public static readonly string fontPath = Environment.CurrentDirectory + "\\Content\\Fonts\\";
++	public static readonly string fontPath = Path.Combine(Environment.CurrentDirectory, "Content/Fonts");
+ 
+-	public static readonly string songPath = Environment.CurrentDirectory + "\\Content\\Songs\\";
++	public static readonly string songPath = Path.Combine(Environment.CurrentDirectory, "Content/Songs");
+ 
+-	public static readonly string soundPath = Environment.CurrentDirectory + "\\Content\\Sounds\\";
++	public static readonly string soundPath = Path.Combine(Environment.CurrentDirectory, "Content/Sounds");
+ 
+-	public static readonly string effectPath = Environment.CurrentDirectory + "\\Content\\Effects\\";
++	public static readonly string effectPath = Path.Combine(Environment.CurrentDirectory, "Content/Effects");
+ 
+-	public static readonly string emitterPath = Environment.CurrentDirectory + "\\Content\\Emitters\\";
++	public static readonly string emitterPath = Path.Combine(Environment.CurrentDirectory, "Content/Emitters");
+ 
+-	public static readonly string modelPath = Environment.CurrentDirectory + "\\Content\\Models\\";
++	public static readonly string modelPath = Path.Combine(Environment.CurrentDirectory, "Content/Models");
+ 
+ 	public static string contentDirectory => content.RootDirectory;
+ 
+@@ -73,7 +73,7 @@
+ 		string[] nextRand = GetFilesInContent(texturePath);
+ 		for (int i = 0; i < nextRand.Length; i++)
+ 		{
+-			string text = nextRand[i].Substring(nextRand[i].LastIndexOf('\\') + 1);
++			string text = nextRand[i].Substring(nextRand[i].LastIndexOf('/') + 1);
+ 			if (text != "pixel")
+ 			{
+ 				textures.Add(text, content.Load<Texture2D>("Textures/" + nextRand[i]));
+@@ -82,22 +82,22 @@
+ 		nextRand = GetFilesInContent(fontPath);
+ 		for (int j = 0; j < nextRand.Length; j++)
+ 		{
+-			fonts.Add(nextRand[j].Substring(nextRand[j].LastIndexOf('\\') + 1), content.Load<SpriteFont>("Fonts/" + nextRand[j]));
++			fonts.Add(nextRand[j].Substring(nextRand[j].LastIndexOf('/') + 1), content.Load<SpriteFont>("Fonts/" + nextRand[j]));
+ 		}
+ 		nextRand = GetFilesInContent(songPath);
+ 		for (int k = 0; k < nextRand.Length; k++)
+ 		{
+-			songs.Add(nextRand[k].Substring(nextRand[k].LastIndexOf('\\') + 1), content.Load<Song>("Songs/" + nextRand[k]));
++			songs.Add(nextRand[k].Substring(nextRand[k].LastIndexOf('/') + 1), content.Load<Song>("Songs/" + nextRand[k]));
+ 		}
+ 		nextRand = GetFilesInContent(soundPath);
+ 		for (int l = 0; l < nextRand.Length; l++)
+ 		{
+-			sounds.Add(nextRand[l].Substring(nextRand[l].LastIndexOf('\\') + 1), content.Load<SoundEffect>("Sounds/" + nextRand[l]));
++			sounds.Add(nextRand[l].Substring(nextRand[l].LastIndexOf('/') + 1), content.Load<SoundEffect>("Sounds/" + nextRand[l]));
+ 		}
+ 		nextRand = GetFilesInContent(effectPath);
+ 		for (int m = 0; m < nextRand.Length; m++)
+ 		{
+-			effects.Add(nextRand[m].Substring(nextRand[m].LastIndexOf('\\') + 1), content.Load<Effect>("Effects/" + nextRand[m]));
++			effects.Add(nextRand[m].Substring(nextRand[m].LastIndexOf('/') + 1), content.Load<Effect>("Effects/" + nextRand[m]));
+ 		}
+ 		if (!loadModels)
+ 		{

@@ -1,0 +1,11 @@
+--- decompiled/JuliHelper/JuliHelper.Content/ContentBuilder.cs
++++ src/JuliHelper/JuliHelper.Content/ContentBuilder.cs
+@@ -67,7 +67,7 @@
+ 		{
+ 			pipelineAssemblies.Add(item);
+ 		}
+-		string directoryName = Path.GetDirectoryName(Application.ExecutablePath);
++		string directoryName = AppDomain.CurrentDomain.BaseDirectory;
+ 		pipelineAssemblies.Add(directoryName + "\\ModelViewerPipeline.dll");
+ 	}
+ 

@@ -1,0 +1,30 @@
+--- decompiled/JuliHelper/JuliHelper/Calculate.cs
++++ src/JuliHelper/JuliHelper/Calculate.cs
+@@ -952,15 +952,18 @@
+ 		effect.Parameters["World"].SetValue(world);
+ 		effect.Parameters["WorldInverseTranspose"].SetValue(Matrix.Invert(Matrix.Transpose(world)));
+ 	}
+-
++	
++#if WPF_LEGACY
+ 	public static Cursor GenerateCursor(byte[] data)
+ 	{
+ 		return LoadCursorFromResource(data);
+ 	}
++#endif
+ 
+ 	[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+ 	private static extern IntPtr LoadCursorFromFile(string path);
+ 
++#if WPF_LEGACY
+ 	public static Cursor LoadCursorFromResource(byte[] data)
+ 	{
+ 		string path = Path.GetTempPath() + Guid.NewGuid().ToString() + ".cur";
+@@ -969,6 +972,7 @@
+ 		File.Delete(path);
+ 		return result;
+ 	}
++#endif
+ 
+ 	public static string StringReplaceUnresolvableCharacters(this SpriteFont font, string text, string replaceWith)
+ 	{

@@ -1,0 +1,12 @@
+--- decompiled/JuliHelper/JuliHelper.csproj
++++ src/JuliHelper/JuliHelper.csproj
+@@ -1,8 +1,7 @@
+-<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
++<Project Sdk="Microsoft.NET.Sdk">
+   <PropertyGroup>
+     <AssemblyName>JuliHelper</AssemblyName>
+     <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+-    <UseWindowsForms>True</UseWindowsForms>
+     <TargetFramework>netcoreapp6.0</TargetFramework>
+   </PropertyGroup>
+   <PropertyGroup>
